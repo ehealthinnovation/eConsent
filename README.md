@@ -1,6 +1,6 @@
 # eConsent
 
-Initial version of Client and Server code will be published soon. 
+Initial version of Client code will be published soon. 
 
 The prototype will be available soon at this test-server: http://testeconsent.ehealthinnovation.org/
 
