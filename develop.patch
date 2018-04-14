@@ -1,0 +1,17 @@
+118c118
+<         <finalName>server</finalName>
+---
+>         <finalName>econsent-server</finalName>
+126c126
+<                             <contextPath>/server</contextPath>
+---
+>                             <contextPath>/econsent-server</contextPath>
+129c129
+<                             <port>8081</port>
+---
+>                             <port>8080</port>
+138c138
+< </project>
+\ No newline at end of file
+---
+> </project>
