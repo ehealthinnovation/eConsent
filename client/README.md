@@ -2,6 +2,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 You can find the most recent version of the CRA guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
 
+Requirements:
+Need node for development
+Need maven to packaging
+
 To see API's in action, import the insomnia file at the project root (./insomnia_2018-04-14.json)
 
 When in development, we are assuming a configuration of:
@@ -33,7 +37,13 @@ Deploy it to your local tomcat instance to use in development.
 Some seed data endpoints of interest:
 
 Sample consent forms:
+On local:
   http://BASE_URL/client/econsentform/info1
   http://BASE_URL/client/econsentform/info2
   http://BASE_URL/client/econsentform/info3
+
+On testeconsent:
+  http://BASE_URL/client/econsentform/ucan
+  http://BASE_URL/client/econsentform/iCanCope
+  http://BASE_URL/client/econsentform/appendectomy
 

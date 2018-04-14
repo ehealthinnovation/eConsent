@@ -25,6 +25,7 @@
   "scripts": {
     "start": "cp ./custom_node_modules/signatureSource.js ./node_modules/react-signature-pad/lib/app.js; react-scripts start",
     "build": "cp ./custom_node_modules/signatureSource.js ./node_modules/react-signature-pad/lib/app.js;react-scripts build",
+    "package": "cp -a ./build/. ./deployment/src/main/webapp/; cd ./deployment; mvn package war:war",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
