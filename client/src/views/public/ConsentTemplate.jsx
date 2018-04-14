@@ -1,0 +1,151 @@
+import React from 'react'
+import Signature from './SignaturePad'
+import HTTPService from '../../Services/HTTP'
+import Loader from '../../components/Loading'
+import FHIREndpoints from '../../Services/FHIREndpoints'
+import LearnMore from '../../components/LearnMore'
+import LearnMoreList from '../../components/LearnMoreList'
+import Img from 'react-image'
+class ConsentTemplate extends React.Component {
+  state = {
+    questions: [],
+    showSignaturePad: false,
+    base64String: '',
+    loading: true,
+  }
+
+  async componentDidMount() {
+    const { match } = this.props
+    const consentFormId = match.params.id
+    console.log(consentFormId)
+    const response = await HTTPService.get(FHIREndpoints.QRs(consentFormId))
+    this.setState({
+      questions: response.item,
+      loading: false,
+    })
+  }
+
+  onShowSignatureClick = () => {
+    this.setState({
+      showSignaturePad: !this.state.showSignaturePad
+    })
+  }
+
+  saveSignature = (base64PngEncodedString) => {
+    // Save signature encoded string
+    this.setState({
+      showSignaturePad: false,
+      base64String: base64PngEncodedString,
+    })
+  }
+
+  traverseQuestions = (question, arg2) => {
+    console.log(arg2)
+    console.log(question)
+
+    if (
+      question.type === 'text' ||
+      !question.item
+    ) {
+      return <div className="box" key={question.linkId}>
+        <h3>{question.text}</h3>
+        <p><b>{question.answer[0].valueString}</b></p>
+      </div>
+    }
+
+    if(
+      question.item &&
+      question.item[0].text === 'Summary' &&
+      question.item[0].answer[0].valueCoding &&
+      question.item[1].text === 'Learn more'
+    ) {
+      console.log('im a learn more list')
+      return <LearnMoreList
+        title={question.text}
+        list={question.item[0].answer}
+        learnMore={question.item[1].answer[0].valueString}
+      />
+    }
+
+    if (
+      // note: This was not present inside nest question... threw off check/
+      //question.type === 'long-text' &&
+      question.item &&
+      question.item[0].text === 'Summary' &&
+      question.item[1].text === 'Learn more'
+    ) {
+      console.log('im a learn more')
+      return <LearnMore
+        key={question.linkId}
+        title={question.text}
+        summary={question.item[0].answer[0].valueString}
+        learnMore={question.item[1].answer[0].valueString}
+      />
+    }
+
+    if (
+      question.item &&
+      question.item[0].text === 'Text' &&
+      question.item[1].text === 'Image'
+    ) {
+      const textDescription = question.item[0].answer[0].valueString
+      const imageData = question.item[1].answer[0].valueAttachment
+      // TODO: Include the image type in the post to server.
+      const imageString = 'data:'+imageData.contentType+','+imageData.data
+      return <div className="box">
+        <p>{textDescription}</p>
+        <Img src={imageString} />
+      </div>
+    }
+
+    if (
+      question.item &&
+      question.item[0].item
+    ) {
+      console.log('I have neasted learn mores')
+      return <div className="box">
+        <h3>{question.text}</h3>
+          {question.item.map(subQuestion => {
+            return this.traverseQuestions(subQuestion, 'subQuestion')
+          })}
+      </div>
+    }
+
+    return null
+  }
+
+  render() {
+    if (this.state.loading) {
+      return <Loader />
+    }
+    return <div className="consent-content">
+
+      <h1>eConsent Signoff</h1>
+      {this.state.questions.map(this.traverseQuestions)}
+      <div style={{ marginBottom: '16px'}}>
+        I am a parent or guardian
+        <input type="checkbox" />
+      </div>
+      <button style={{ marginBottom: '16px'}} className={`button ${this.state.base64String ? '' : 'is-large is-primary'}`} onClick={this.onShowSignatureClick}>{this.state.base64String ? 'Redo Signature' : 'Give Consent'}</button>
+      {this.state.showSignaturePad ?
+        <Signature saveSignature={this.saveSignature} closePad={this.onShowSignatureClick} /> : null
+      }
+      {this.state.base64String ?
+        <div className="box" style={{
+          width: '70%',
+          margin: 'auto',
+          marginBottom: '16px'
+        }}>
+          <img style={{ width: '80%'}} alt="I am a signature" src={this.state.base64String} />
+        </div> : null
+      }
+      {
+        this.state.base64String ?
+        <button className={`button ${this.state.base64String ? 'is-large is-primary' : ''}`} style={{ marginBottom: '16px', zIndex: 1}}>Submit Consent</button> : null
+      }
+    </div>
+  }
+
+}
+
+export default ConsentTemplate
