@@ -6,6 +6,7 @@ import FHIREndpoints from '../../Services/FHIREndpoints'
 import LearnMore from '../../components/LearnMore'
 import LearnMoreList from '../../components/LearnMoreList'
 import Img from 'react-image'
+
 class ConsentTemplate extends React.Component {
   state = {
     questions: [],
@@ -17,7 +18,6 @@ class ConsentTemplate extends React.Component {
   async componentDidMount() {
     const { match } = this.props
     const consentFormId = match.params.id
-    console.log(consentFormId)
     const response = await HTTPService.get(FHIREndpoints.QRs(consentFormId))
     this.setState({
       questions: response.item,
@@ -40,8 +40,6 @@ class ConsentTemplate extends React.Component {
   }
 
   traverseQuestions = (question, arg2) => {
-    console.log(arg2)
-    console.log(question)
 
     if (
       question.type === 'text' ||
@@ -59,7 +57,6 @@ class ConsentTemplate extends React.Component {
       question.item[0].answer[0].valueCoding &&
       question.item[1].text === 'Learn more'
     ) {
-      console.log('im a learn more list')
       return <LearnMoreList
         title={question.text}
         list={question.item[0].answer}
@@ -74,7 +71,6 @@ class ConsentTemplate extends React.Component {
       question.item[0].text === 'Summary' &&
       question.item[1].text === 'Learn more'
     ) {
-      console.log('im a learn more')
       return <LearnMore
         key={question.linkId}
         title={question.text}
@@ -102,7 +98,6 @@ class ConsentTemplate extends React.Component {
       question.item &&
       question.item[0].item
     ) {
-      console.log('I have neasted learn mores')
       return <div className="box">
         <h3>{question.text}</h3>
           {question.item.map(subQuestion => {
