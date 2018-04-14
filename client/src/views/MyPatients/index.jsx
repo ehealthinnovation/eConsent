@@ -30,7 +30,7 @@ class MyPatients extends React.Component {
   componentDidMount() {
     const { dispatch, location } = this.props
     const patientId = this.searchParamsForPatientId(location.search)
-    this.props.dispatch(fetchPatientConsentsIfNeeded(patientId))
+    dispatch(fetchPatientConsentsIfNeeded(patientId))
   }
 
   render() {
