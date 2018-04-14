@@ -5,6 +5,7 @@ export const questionnaireIds = {
 const FHIREndpoints = {
   valueSet: (valueSetReference) => `fhir/${valueSetReference}`,
   patient: 'fhir/Patient',
+  patientConsents: id => `fhir/Consent/${id}`,
   questionnaire: (questionnaireId) => `fhir/Questionnaire/${questionnaireId}`,
   QRs: (qrId) => `fhir/QuestionnaireResponse/${qrId}`
 }

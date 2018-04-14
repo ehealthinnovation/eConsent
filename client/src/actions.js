@@ -82,7 +82,6 @@ const fetchPatientConsents = (patientId) => {
   return async dispatch => {
     dispatch(requestPatientConsents)
     let res = await HTTP.get(FHIREndpoints.patientConsents(patientId)).catch(e => { throw e })
-    console.log(res)
     dispatch(receivePatientConsents(res))
   }
 }

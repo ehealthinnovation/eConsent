@@ -37,7 +37,6 @@ class MyPatients extends React.Component {
     const { patientConsentForms, isFetchingPatientConsentForms, patientConsentFormsValid } = this.props
     return (
       <div>
-        <p>HI im a patient</p>
         {!patientConsentFormsValid && <Loading />}
         {(isFetchingPatientConsentForms && patientConsentForms.length === 0) && <Loading />}
         {!isFetchingPatientConsentForms && patientConsentForms.length === 0 && <h1>No patients.</h1>}
