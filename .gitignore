@@ -29,3 +29,10 @@ hs_err_pid*
 #node_modules
 */node_modules/*
 client/node_modules
+
+#misc
+.DS_Store
+.settings
+.project
+.classpath
+.vscode
