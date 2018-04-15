@@ -126,7 +126,7 @@ const FormItems = (question, fontSize, indent) => {
 
 class NewConsentForm extends React.Component {
   componentDidMount() {
-    this.props.dispatch(fetchQuestionnaireIfNeeded(questionnaireIds.template1))
+    this.props.dispatch(fetchQuestionnaireIfNeeded(questionnaireIds.sickKids))
   }
 
   render() {

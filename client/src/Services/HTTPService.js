@@ -1,4 +1,4 @@
-class HTTP {
+class HTTPService {
   get = async (endpoint) => {
     const myInit = {
       method: 'GET',
@@ -43,4 +43,4 @@ class HTTP {
   }
 }
 
-export default new HTTP()
+export default new HTTPService()

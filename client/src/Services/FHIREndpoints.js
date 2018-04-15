@@ -1,5 +1,6 @@
 export const questionnaireIds = {
-  template1: 'template1'
+  template1: 'template1',
+  sickKids: 'sickKids'
 }
 
 const FHIREndpoints = {

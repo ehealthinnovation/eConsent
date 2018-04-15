@@ -1,6 +1,6 @@
 import React from 'react'
 import Signature from './SignaturePad'
-import HTTPService from '../../Services/HTTP'
+import HTTPService from '../../Services/HTTPService'
 import Loader from '../../components/Loading'
 import FHIREndpoints from '../../Services/FHIREndpoints'
 import LearnMore from '../../components/LearnMore'

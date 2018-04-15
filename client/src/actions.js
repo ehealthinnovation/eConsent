@@ -1,5 +1,5 @@
 import FHIREndpoints from './Services/FHIREndpoints'
-import HTTP from './Services/HTTP'
+import HTTPService from './Services/HTTPService'
 export const REQUEST_PATIENT_CONSENTS = 'REQUEST_PATIENT_CONSENTS'
 export const RECEIVE_PATIENT_CONSENTS = 'RECEIVE_PATIENT_CONSENTS'
 export const REQUEST_PATIENTS = 'REQUEST_PATIENTS'
@@ -81,7 +81,7 @@ export const receivePatientConsents = (patientConsents) => {
 const fetchPatientConsents = (patientId) => {
   return async dispatch => {
     dispatch(requestPatientConsents)
-    let res = await HTTP.get(FHIREndpoints.patientConsents(patientId)).catch(e => { throw e })
+    let res = await HTTPService.get(FHIREndpoints.patientConsents(patientId)).catch(e => { throw e })
     dispatch(receivePatientConsents(res))
   }
 }
@@ -107,7 +107,7 @@ export const fetchPatientConsentsIfNeeded = (patientId) => {
 const fetchValueSet = (valueSetReference) => {
   return async dispatch => {
     dispatch(requestValueSet(valueSetReference))
-    let res = await HTTP.get(FHIREndpoints.valueSet(valueSetReference)).catch(e => { throw e })
+    let res = await HTTPService.get(FHIREndpoints.valueSet(valueSetReference)).catch(e => { throw e })
     dispatch(RECEIVEValueSet(res, valueSetReference))
   }
 }
@@ -131,7 +131,7 @@ export const fetchValueSetIfNeeded = (valueSetReference) => {
 const fetchQuestionnaire = (questionnaireId) => {
   return async dispatch => {
     dispatch(requestQuestionnaire(questionnaireId))
-    let res = await HTTP.get(FHIREndpoints.questionnaire(questionnaireId)).catch(e => { throw e })
+    let res = await HTTPService.get(FHIREndpoints.questionnaire(questionnaireId)).catch(e => { throw e })
     dispatch(receieveQuestionnaire(res))
   }
 }
@@ -141,7 +141,7 @@ const fetchPatients = () => {
     dispatch(requestPatients)
     // Async await without a try catch block!
     // https://blog.grossman.io/how-to-write-async-await-without-try-catch-blocks-in-javascript/ (In comments by dominic108)
-    let res = await HTTP.get(FHIREndpoints.patients).catch(e => { throw e })
+    let res = await HTTPService.get(FHIREndpoints.patients).catch(e => { throw e })
     dispatch(receivePatients(res))
   }
 }
