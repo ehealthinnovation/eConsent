@@ -1,0 +1,44 @@
+.App {
+  text-align: center;
+}
+
+.App-title {
+  font-size: 3em;
+}
+
+.consent-content {
+  text-align: center;
+}
+
+.box {
+  margin: 16px;
+}
+.new-consent-question {
+  font-weight: 600;
+  font-style: oblique;
+}
+
+/* Start Loading Animation */
+/* Inspired by https://github.com/jgthms/bulma/issues/847 and using the css code for a button loader */
+.loading-page.is-loading {
+  position: relative;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.loading-page.is-loading:after {
+  -webkit-animation: spinAround 500ms infinite linear;
+  animation: spinAround 500ms infinite linear;
+  border: 2px solid #dbdbdb;
+  border-radius: 290486px;
+  border-right-color: transparent;
+  border-top-color: transparent;
+  content: "";
+    position: absolute;
+    top: calc(50% - 2.5em);
+    left: calc(50% - 2.5em);
+    width: 10em;
+    height: 10em;
+    border-width: 0.25em;
+}
+/* End Loading Animation */
