@@ -44,7 +44,7 @@ class ConsentTemplate extends React.Component {
       question.type === 'text'
     ) {
       return <div className="box" key={question.linkId}>
-        <h3>{question.text}</h3>
+        <h2>{question.text}</h2>
         <p><b>{question.answer[0].valueString}</b></p>
       </div>
     }
@@ -93,7 +93,7 @@ class ConsentTemplate extends React.Component {
       question.item[0].item
     ) {
       return <div className="box">
-        <h3>{question.text}</h3>
+        <h2>{question.text}</h2>
           {question.item.map(subQuestion => {
             return this.traverseQuestions(subQuestion, 'subQuestion')
           })}
@@ -104,7 +104,7 @@ class ConsentTemplate extends React.Component {
       !question.item
     ) {
       return <div className="box" key={question.linkId}>
-        <h3>{question.text}</h3>
+        <h2>{question.text}</h2>
         <p><b>{question.answer[0].valueString}</b></p>
       </div>
     }
