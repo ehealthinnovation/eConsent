@@ -15,7 +15,7 @@ class LearnMore extends React.Component {
     const { title, summary, learnMore } = this.props
     return (
       <div className="box">
-        <h2>{title}</h2>
+        <p><b>{title}</b></p>
         { !this.state.showMore && <p>{summary}</p> }
         { !this.state.showMore && <button onClick={this.toggle} className="button">Show more...</button>}
         { this.state.showMore && <p>{learnMore}</p>}

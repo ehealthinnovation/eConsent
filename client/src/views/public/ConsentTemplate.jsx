@@ -44,8 +44,8 @@ class ConsentTemplate extends React.Component {
       question.type === 'text'
     ) {
       return <div className="box" key={question.linkId}>
-        <h2>{question.text}</h2>
-        <p><b>{question.answer[0].valueString}</b></p>
+        <b>{question.text}</b>
+        <p>{question.answer[0].valueString}</p>
       </div>
     }
 
@@ -83,7 +83,7 @@ class ConsentTemplate extends React.Component {
       // TODO: Include the image type in the post to server.
       const imageString = "data:" + imageData.contentType + ';base64,' + imageData.data
       return <div className="box">
-        <p>{textDescription}</p>
+        <p><b>{textDescription}</b></p>
         <Img src={imageString} />
       </div>
     }
@@ -93,7 +93,7 @@ class ConsentTemplate extends React.Component {
       question.item[0].item
     ) {
       return <div className="box">
-        <h2>{question.text}</h2>
+        <b>{question.text}</b>
           {question.item.map(subQuestion => {
             return this.traverseQuestions(subQuestion, 'subQuestion')
           })}
@@ -104,8 +104,8 @@ class ConsentTemplate extends React.Component {
       !question.item
     ) {
       return <div className="box" key={question.linkId}>
-        <h2>{question.text}</h2>
-        <p><b>{question.answer[0].valueString}</b></p>
+        <b>{question.text}</b>
+        <p>{question.answer[0].valueString}</p>
       </div>
     }
 
@@ -117,8 +117,8 @@ class ConsentTemplate extends React.Component {
       return <Loader />
     }
     return <div className="consent-content">
-
-      <h1>eConsent Signoff</h1>
+      <!-- TODO: populate with name of selected patient -->
+      <h1 class="title">Patient: Doe, John</h1>
       {this.state.questions.map(this.traverseQuestions)}
       <div style={{ marginBottom: '16px'}}>
         I am a parent or guardian

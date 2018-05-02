@@ -16,10 +16,10 @@ class LearnMoreList extends React.Component {
     return (
       <div className="box">
 
-        <h2>{title}</h2>
+        <b>{title}</b>
         <ul>
           {list.map(answer => {
-            return <li key={answer.valueCoding.code}><b>{answer.valueCoding.display}</b></li>
+            return <li key={answer.valueCoding.code}>- {answer.valueCoding.display}</li>
           })}
         </ul>
         { !this.state.showMore && <button onClick={this.toggle} className="button">Show more...</button>}
