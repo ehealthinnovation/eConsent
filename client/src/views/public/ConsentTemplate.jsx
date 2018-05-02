@@ -40,7 +40,6 @@ class ConsentTemplate extends React.Component {
   }
 
   traverseQuestions = (question, arg2) => {
-    console.log(question)
     if (
       question.type === 'text'
     ) {
