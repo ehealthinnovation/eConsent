@@ -117,8 +117,8 @@ class ConsentTemplate extends React.Component {
       return <Loader />
     }
     return <div className="consent-content">
-
-      <h1>eConsent Signoff</h1>
+      <!-- TODO: populate with name of selected patient -->
+      <h1 class="title">Patient: Doe, John</h1>
       {this.state.questions.map(this.traverseQuestions)}
       <div style={{ marginBottom: '16px'}}>
         I am a parent or guardian
