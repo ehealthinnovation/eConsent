@@ -83,7 +83,7 @@ class ConsentTemplate extends React.Component {
       // TODO: Include the image type in the post to server.
       const imageString = "data:" + imageData.contentType + ';base64,' + imageData.data
       return <div className="box">
-        <p>{textDescription}</p>
+        <b>{textDescription}</b>
         <Img src={imageString} />
       </div>
     }
