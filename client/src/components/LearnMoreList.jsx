@@ -16,13 +16,12 @@ class LearnMoreList extends React.Component {
     return (
       <div className="box">
 
-        <h3>{title}</h3>
+        <h2>{title}</h2>
         <ul>
           {list.map(answer => {
             return <li key={answer.valueCoding.code}><b>{answer.valueCoding.display}</b></li>
           })}
         </ul>
-        { !this.state.showMore && <p>{learnMore.substring(0,100)}...</p>}
         { !this.state.showMore && <button onClick={this.toggle} className="button">Show more...</button>}
         { this.state.showMore && <p>{learnMore}</p>}
         { this.state.showMore && <button onClick={this.toggle} className="button">Show less...</button>}
