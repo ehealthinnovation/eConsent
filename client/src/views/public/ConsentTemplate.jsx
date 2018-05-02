@@ -40,10 +40,9 @@ class ConsentTemplate extends React.Component {
   }
 
   traverseQuestions = (question, arg2) => {
-
+    console.log(question)
     if (
-      question.type === 'text' ||
-      !question.item
+      question.type === 'text'
     ) {
       return <div className="box" key={question.linkId}>
         <h3>{question.text}</h3>
@@ -79,15 +78,11 @@ class ConsentTemplate extends React.Component {
       />
     }
 
-    if (
-      question.item &&
-      question.item[0].text === 'Text' &&
-      question.item[1].text === 'Image'
-    ) {
-      const textDescription = question.item[0].answer[0].valueString
-      const imageData = question.item[1].answer[0].valueAttachment
+    if (question.answer && question.answer[0].valueAttachment) {
+      const textDescription = question.text
+      const imageData = question.answer[0].valueAttachment
       // TODO: Include the image type in the post to server.
-      const imageString = 'data:'+imageData.contentType+','+imageData.data
+      const imageString = "data:" + imageData.contentType + ';base64,' + imageData.data
       return <div className="box">
         <p>{textDescription}</p>
         <Img src={imageString} />
@@ -103,6 +98,15 @@ class ConsentTemplate extends React.Component {
           {question.item.map(subQuestion => {
             return this.traverseQuestions(subQuestion, 'subQuestion')
           })}
+      </div>
+    }
+
+    if (
+      !question.item
+    ) {
+      return <div className="box" key={question.linkId}>
+        <h3>{question.text}</h3>
+        <p><b>{question.answer[0].valueString}</b></p>
       </div>
     }
 
